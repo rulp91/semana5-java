@@ -4,7 +4,9 @@ package es.master.isia.controller;
 import com.google.common.eventbus.Subscribe;
 import es.master.isia.model.Event.SelectedDirEvent;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.EventListener;
@@ -37,12 +39,35 @@ public class DirProcessController  implements EventListener {
                     loopIterativelyDir(currentFile);
 
                 if(isTextFile(currentFile))
-                    System.out.println(currentFile.getName());
+                    processFile(currentFile);
+
             }
         }
 
         if(isTextFile(file))
-            System.out.println(file.getName());
+            processFile(file);
+
+    }
+
+    private void processFile(File file) throws IOException {
+
+        BufferedReader reader;
+
+        reader = new BufferedReader(new FileReader(file));
+        String line = reader.readLine();
+        boolean dirIsPrinted = false;
+        while (line != null) {
+            if(line.contains("wax synthase")) {
+                if(!dirIsPrinted) {
+                    System.out.println(file.getAbsolutePath());
+                    dirIsPrinted = true;
+                }
+                System.out.println("\t".concat(line));
+            }
+            line = reader.readLine();
+        }
+
+        reader.close();
 
     }
 

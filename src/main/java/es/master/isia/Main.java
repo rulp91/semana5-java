@@ -23,8 +23,6 @@ public class Main {
         frame.setSize(panel.getPreferredSize());
         frame.setVisible(true);
 
-
-
         System.out.println("Hello world!");
     }
 }
