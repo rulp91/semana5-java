@@ -1,5 +1,6 @@
 package es.master.isia;
 
+import es.master.isia.controller.DirProcessController;
 import es.master.isia.view.DirChooserView;
 
 import javax.swing.*;
@@ -23,6 +24,7 @@ public class Main {
         frame.setVisible(true);
 
 
-        // System.out.println("Hello world!");
+
+        System.out.println("Hello world!");
     }
 }
