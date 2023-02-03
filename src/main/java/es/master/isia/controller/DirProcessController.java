@@ -1,23 +1,34 @@
 package es.master.isia.controller;
 
 
+import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import es.master.isia.model.Event.CloseDirChooserEvent;
 import es.master.isia.model.Event.SelectedDirEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.EventListener;
 
-public class DirProcessController  implements EventListener {
+
+public class DirProcessController{
+
+    @Autowired
+    private final EventBus eventbus = new EventBus();
 
     private static DirProcessController instance;
+
+    public DirProcessController() {
+        eventbus.register(MainViewController.getInstance());
+    }
+
     public static DirProcessController getInstance() {
-        if (instance == null) {
+        if (instance == null)
             instance = new DirProcessController();
-        }
+
         return instance;
     }
 
@@ -25,6 +36,7 @@ public class DirProcessController  implements EventListener {
     public void onEvent(SelectedDirEvent event) {
         try {
             loopIterativelyDir(event.getFile());
+            eventbus.post(new CloseDirChooserEvent());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

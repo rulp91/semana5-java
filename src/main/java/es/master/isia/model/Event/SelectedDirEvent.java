@@ -3,7 +3,7 @@ package es.master.isia.model.Event;
 import java.io.File;
 
 public class SelectedDirEvent {
-    private File file;
+    private final File file;
 
     public SelectedDirEvent(File message) {
         this.file = message;
