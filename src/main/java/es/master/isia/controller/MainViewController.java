@@ -8,6 +8,10 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+
+/**
+ * Controlador de la vista principal
+ */
 public class MainViewController {
     private static MainViewController instance;
     private final JFrame frame = new JFrame("");
@@ -18,6 +22,9 @@ public class MainViewController {
         return instance;
     }
 
+    /**
+     * Muestra un JFrame de selección de directorio
+     */
     public void ShowDirChooser(){
 
         DirChooserView panel = new DirChooserView();
@@ -33,6 +40,11 @@ public class MainViewController {
         frame.setVisible(true);
     }
 
+    /**
+     * Recepciona el evento de final de procesamiento del directorio
+     * y cierra JFrame
+     * @param event
+     */
     @Subscribe
     public void onEvent(CloseDirChooserEvent event) {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));

@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 
+/**
+ * Controlador singleton de procesado de directorios
+ */
 public class DirProcessController{
 
     @Autowired
@@ -21,10 +24,14 @@ public class DirProcessController{
 
     private static DirProcessController instance;
 
-    public DirProcessController() {
+    private DirProcessController() {
         eventbus.register(MainViewController.getInstance());
     }
 
+    /**
+     * Singleton del controlador
+     * @return
+     */
     public static DirProcessController getInstance() {
         if (instance == null)
             instance = new DirProcessController();
@@ -32,6 +39,11 @@ public class DirProcessController{
         return instance;
     }
 
+    /**
+     * Recepciona el evento de selección de un directorio
+     * y lanza su procesamiento
+     * @param event
+     */
     @Subscribe
     public void onEvent(SelectedDirEvent event) {
         try {
@@ -42,6 +54,11 @@ public class DirProcessController{
         }
     }
 
+    /**
+     * Recorre de forma iterativa el arbol de directorios y busca las coincidencias
+     * @param file
+     * @throws IOException
+     */
     private void loopIterativelyDir(File file) throws IOException {
 
         if (file.isDirectory()) {
@@ -51,17 +68,22 @@ public class DirProcessController{
                     loopIterativelyDir(currentFile);
 
                 if(isTextFile(currentFile))
-                    processFile(currentFile);
+                    processTextFile(currentFile);
 
             }
         }
 
         if(isTextFile(file))
-            processFile(file);
+            processTextFile(file);
 
     }
 
-    private void processFile(File file) throws IOException {
+    /**
+     * Procesa la búsqueda de texto dentro del fichero
+     * @param file
+     * @throws IOException
+     */
+    private void processTextFile(File file) throws IOException {
 
         BufferedReader reader;
 
@@ -83,6 +105,12 @@ public class DirProcessController{
 
     }
 
+    /**
+     * Retorna si el fichero es un fichero de texto
+     * @param file
+     * @return
+     * @throws IOException
+     */
     private boolean isTextFile(File file) throws IOException {
         String mimeType = Files.probeContentType(file.getAbsoluteFile().toPath());
         return  "text/plain".equalsIgnoreCase(mimeType);

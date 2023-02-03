@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class DirChooserView extends JPanel implements ActionListener {
 
-
     @Autowired
     private final EventBus eventbus = new EventBus();
 
@@ -35,14 +34,12 @@ public class DirChooserView extends JPanel implements ActionListener {
 
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
             eventbus.post(new SelectedDirEvent(chooser.getSelectedFile()));
-        else
-            System.out.println("No ha seleccionado nada ");
+
     }
 
     @Override
     public Dimension getPreferredSize(){
         return new Dimension(400, 200);
     }
-
 
 }
