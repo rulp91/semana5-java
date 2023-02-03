@@ -1,7 +1,28 @@
 package es.master.isia;
 
+import es.master.isia.view.DirChooser;
+
+import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        JFrame frame = new JFrame("");
+        DirChooser panel = new DirChooser();
+        frame.addWindowListener(
+                new WindowAdapter() {
+                    public void windowClosing(WindowEvent e) {
+                        System.exit(0);
+                    }
+                }
+        );
+        frame.getContentPane().add(panel,"Center");
+        frame.setSize(panel.getPreferredSize());
+        frame.setVisible(true);
+
+
+        // System.out.println("Hello world!");
     }
 }
