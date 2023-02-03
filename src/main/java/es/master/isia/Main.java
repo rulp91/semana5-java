@@ -1,6 +1,6 @@
 package es.master.isia;
 
-import es.master.isia.view.DirChooser;
+import es.master.isia.view.DirChooserView;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         JFrame frame = new JFrame("");
-        DirChooser panel = new DirChooser();
+        DirChooserView panel = new DirChooserView();
         frame.addWindowListener(
                 new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {

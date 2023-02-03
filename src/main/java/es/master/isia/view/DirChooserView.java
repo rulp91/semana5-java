@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DirChooser extends JPanel implements ActionListener {
+public class DirChooserView extends JPanel implements ActionListener {
 
     JButton go;
 
@@ -13,8 +13,8 @@ public class DirChooser extends JPanel implements ActionListener {
     String choosertitle;
 
 
-    public DirChooser() {
-        go = new JButton("Do it");
+    public DirChooserView() {
+        go = new JButton("Seleccione el directorio");
         go.addActionListener(this);
         add(go);
     }
