@@ -28,6 +28,8 @@ public class DirProcessController{
         eventbus.register(MainViewController.getInstance());
     }
 
+    private String searchString;
+
     /**
      * Singleton del controlador
      * @return
@@ -47,6 +49,7 @@ public class DirProcessController{
     @Subscribe
     public void onEvent(SelectedDirEvent event) {
         try {
+            searchString = event.getSearchString();
             loopIterativelyDir(event.getFile());
             eventbus.post(new CloseDirChooserEvent());
         } catch (IOException e) {
@@ -68,22 +71,23 @@ public class DirProcessController{
                     loopIterativelyDir(currentFile);
 
                 if(isTextFile(currentFile))
-                    processTextFile(currentFile);
+                    buscar(currentFile, searchString);
 
             }
         }
 
         if(isTextFile(file))
-            processTextFile(file);
+            buscar(file, searchString);
 
     }
 
     /**
-     * Procesa la búsqueda de texto dentro del fichero
+     * Función demandada por el ejercicio
      * @param file
+     * @param searchString
      * @throws IOException
      */
-    private void processTextFile(File file) throws IOException {
+    private void buscar(File file, String searchString) throws IOException {
 
         BufferedReader reader;
 
@@ -91,7 +95,7 @@ public class DirProcessController{
         String line = reader.readLine();
         boolean dirIsPrinted = false;
         while (line != null) {
-            if(line.contains("wax synthase")) {
+            if(line.contains(searchString)) {
                 if(!dirIsPrinted) {
                     System.out.println(file.getAbsolutePath());
                     dirIsPrinted = true;

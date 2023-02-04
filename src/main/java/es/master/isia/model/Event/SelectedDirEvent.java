@@ -7,11 +7,17 @@ import java.io.File;
  */
 public class SelectedDirEvent {
     private final File file;
+    private final String searchString;
 
-    public SelectedDirEvent(File message) {
-        this.file = message;
+    public SelectedDirEvent(File file, String searchString) {
+        this.file = file;
+        this.searchString = searchString;
     }
     public File getFile() {
         return file;
+    }
+
+    public String getSearchString() {
+        return searchString;
     }
 }
