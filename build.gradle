@@ -10,6 +10,10 @@ repositories {
 }
 
 dependencies {
+
+    implementation 'com.google.guava:guava:11.0.2'
+    implementation 'com.liferay:org.springframework.beans:5.2.22.LIFERAY-PATCHED-1'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
