@@ -30,6 +30,8 @@ public class DirChooserView extends JPanel implements ActionListener, DocumentLi
      * Inicializa la vista
      */
     private void initView() {
+        this.setBackground(new Color(233, 241, 164));
+        this.setBorder(BorderFactory.createTitledBorder("<html>Selecci&oacute;n de directorio con Java<html>"));
         l.setText("<html>Introduzca la cadena de b&uacute;squeda y a continuaci&oacute;seleccione el directorio<html>");
         l.setBounds(10,20, 430,40);
         tf.setText("wax synthase");

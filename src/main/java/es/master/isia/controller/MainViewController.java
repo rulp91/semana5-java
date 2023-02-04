@@ -1,12 +1,14 @@
 package es.master.isia.controller;
 
 import com.google.common.eventbus.Subscribe;
+import com.google.common.io.Resources;
 import es.master.isia.model.Event.CloseDirChooserEvent;
 import es.master.isia.view.DirChooserView;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 
 
 /**
@@ -14,7 +16,7 @@ import java.awt.event.WindowEvent;
  */
 public class MainViewController {
     private static MainViewController instance;
-    private final JFrame frame = new JFrame("");
+    private final JFrame frame = new JFrame("Java");
     public static MainViewController getInstance() {
         if (instance == null) {
             instance = new MainViewController();
@@ -35,6 +37,9 @@ public class MainViewController {
                     }
                 }
         );
+
+        URL iconResource  = Resources.getResource("es.master.isia/img.png");
+        frame.setIconImage(new ImageIcon(iconResource.getPath()).getImage());
         frame.getContentPane().add(panel,"Center");
         frame.setSize(panel.getPreferredSize());
         frame.setVisible(true);
